@@ -1,4 +1,4 @@
-package com.springboot.biz;
+package com.springboot.biz.answer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

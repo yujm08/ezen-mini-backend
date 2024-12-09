@@ -1,7 +1,9 @@
-package com.springboot.biz;
+package com.springboot.biz.question;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.springboot.biz.answer.Answer;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -30,9 +32,9 @@ public class Question {
 	
 	private LocalDateTime createDate;
 	
-	@OneToMany(mappedBy = "question" , cascade = CascadeType.REMOVE)
-	private List<Answer> answerList;
-	
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Answer> answerList;
+
 	
 
 }

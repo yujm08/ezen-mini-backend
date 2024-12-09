@@ -1,6 +1,7 @@
-package com.springboot.biz;
+package com.springboot.biz.question;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 
 
@@ -17,8 +18,9 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 	 */
 	
 	//findBy"이름규칙"에 의해 자동으로 method가 생성
-	Question findBySubject(String subject);
+	Question findBySubject(String subject); //select * from question where subject =? ;
 	Question findBySubjectAndContent(String subject, String content);
+	Question findBySubjectOrContent(String subject, String content);
 	List<Question> findBySubjectLike(String subject);
 	
 
