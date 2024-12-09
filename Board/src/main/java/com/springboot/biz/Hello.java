@@ -10,7 +10,7 @@ public class Hello {
 	@RequestMapping("he")
 	@ResponseBody
 	public String hello() {
-		return "안녕하세요--";
+		return "안녕하세요-----";
 	}
 
 }
