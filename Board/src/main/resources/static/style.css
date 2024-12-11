@@ -1,0 +1,9 @@
+textarea{
+	width : 100%;
+	background-color: aqua;
+}
+
+input[type=submit]{
+	margin-top: 10px;
+	
+}
