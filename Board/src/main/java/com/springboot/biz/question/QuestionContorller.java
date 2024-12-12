@@ -7,12 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@RequestMapping("/question")
+
+
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/question")
 public class QuestionContorller {
 	
 	private final QuestionService questionService;
@@ -30,6 +35,20 @@ public class QuestionContorller {
 		model.addAttribute("question", question);
 		return "question_detail";
 	}
+	
+	@GetMapping("/create")
+	public String questionCreate() {
+		return "question_form";
+	}
+	
+	@PostMapping("/create")
+	public String questionCreate(@RequestParam(value= "subject") String subject,
+			@RequestParam(value = "content") String content) {
+		//질문을 저장 실행 후 생성
+		this.questionService.create(subject, content);
+		return "redirect:/question/list";
+	}
+	
 		
 	
 	
