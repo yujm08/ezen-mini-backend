@@ -1,29 +1,32 @@
 package com.springboot.biz;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.biz.answer.AnswerRepository;
-import com.springboot.biz.question.QuestionRepository;
+import com.springboot.biz.question.QuestionService;
 
 @SpringBootTest
 class BoardApplicationTests {
 	
 	@Autowired
-	private QuestionRepository questionRepository;
+	private QuestionService questionService;
 	
 	@Autowired
 	private AnswerRepository answerRepository;
 	        
 	@Test
 	void contextLoads() {
+		
+//		//DB에 데이터 넣기
+//		for (int i=0; i<=300 ; i++) {
+//			String subject = String.format("테스트 데이트입니다[%03d]", i);
+//			String content = "내용 없음";
+//			this.questionService.create(subject, content);
+//		}
+		
+		
 		
 //		Question q1 = new Question();
 //		q1.setSubject("국가");
@@ -107,15 +110,6 @@ class BoardApplicationTests {
 //		assertTrue(oa.isPresent());
 //		Answer a = oa.get();
 //		System.out.println("답변 글 번호 : " + a.getQuestion().getId());
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
 
