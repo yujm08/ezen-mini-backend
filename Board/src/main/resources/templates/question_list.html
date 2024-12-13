@@ -1,27 +1,34 @@
-<html layout:decorate="~{layout}">
-<div layout:fragment="content" class="container my-3">
-<table class="table">
-   <thead class="table-dark">
-      <tr>
-         <td>번호</td>
-         <td>제목</td>
-         <td>작성일시</td>
-      </tr>
-   </thead>
-
-   <tbody>
-      <tr th:each=" question  ,loop   : ${questionList}   ">
-         <td th:text="${loop.count}"></td>
-         <td><a th:href="@{|/question/detail/${question.id}|}"
-         th:text="${question.subject}"></td>
-         
-         <td th:text="${#temporals.format(question.createDate , 'yyyy-MM-dd HH:mm:ss')}"></td>
-         
-      </tr>
-   </tbody>
-</table>
-
-<a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
-
-</div>
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>질문 목록</title>
+<!--	<link rel="stylesheet" type="text/css" th:href="@{/text_question_list.css}">-->
+	<!--<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">--> <!-- CSS 파일 링크 -->
+</head>
+<body>
+	<center>
+		<div layout:fragment="content" class="container my-3">
+		<table class="table">
+			<caption>질문 목록</caption>
+			<thead class="table-dark">
+				<tr>
+					<td>번호</td>
+					<td>제목</td>
+					<td>작성일자</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="question, loop : ${questionList}">
+					<td th:text="${question.id}"></td> <!--${loop.count} -->
+					<td><a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a></td>
+					<td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
+		</div>
+	</center>
+</body>
 </html>

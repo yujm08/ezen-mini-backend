@@ -1,22 +1,27 @@
-<html layout:decorate="~{Layout}">
-<div layout:fragment="content" class="container my-3">
-    <h5 class="my-3 border-bottom pb-2">질문 등록</h5>
-    <form th:action="@{/question/create}" method="post" th:object="${questionForm}">
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-        <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
-      </div>
-    
-      <div class="mb-3">
-        <label for="subject" class="form-Label">제목</label>
-        <input type="text" th:field="*{subject}" class="form-control" />
-      </div>
-      
-      <div class="mb-3">
-        <label for="content" class="form-Label">내용</label>
-        <textarea rows="15" th:field="*{content}" class="form-control"></textarea>
-      </div>
-      
-      <input type="submit" value="저장하기" class="btn btn-primary" />
-    </form>
-</div>
+
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>답변 페이지</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container my-3">
+		<h5 class="my-3 border-bottom pb2">질문 등록</h5>
+		<form th:action="@{/question/create}" method="post" th:object="${questionForm}">
+			<div th:replace="~{form_errors::formErrorsFragment}"></div>
+			
+			<div class="mb-3">
+				<label for="subject" class="form-label">제목</label>
+				<input type="text" th:field="*{subject}" class="form-control">
+			</div>
+			<div class="mb-3">
+				<label for="content" class="form-label">내용</label>
+				<textarea rows="15" th:field="*{content}" class="form-control"></textarea>
+			</div>
+			<input type="submit" value="저장하기" class="btn btn-primary my-2">
+		</form>
+	</div>
+</body>
 </html>

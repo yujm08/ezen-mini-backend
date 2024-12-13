@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <!-- Required meta tag -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-    <title>게시판 프로그램</title>
-  </head>
-  
-  <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-  <th:block layout:fragment="content"></th:block>
-  <!-- 기본 템플릿 안에 삽입될 내용 End -->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<title>답변 페이지</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+	</head>
+
+	<body>
+		<!--기본 템플릿 안에 삽입될 내용 Start-->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+		  <div class="container-fluid">
+		    <a class="navbar-brand" href="/">게시판</a>
+		  </div>
+		</nav>
+		<th:block layout:fragment="content"></th:block>
+		<!--기본 템플릿 안에 삽입될 내용 End-->
+	</body>
 </html>
 
-
+<!--<center>
+	<body>
+	    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+	        <div class="container-fluid">
+	            <a class="navbar-brand" htef="/">게시판</a>
+	        </div>
+	    </nav>
+	</body>
+-->
