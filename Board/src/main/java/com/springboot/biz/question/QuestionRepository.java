@@ -26,7 +26,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 	Question findBySubjectAndContent(String subject, String content);
 	Question findBySubjectOrContent(String subject, String content);
 	List<Question> findBySubjectLike(String subject);
-	Page<Question> findAll(Pageable pageable);
+	
+	Page<Question> findAll(Pageable pageable); //원래는 JPA에서 기본으로 가지고 있었다.
 	
 	
 

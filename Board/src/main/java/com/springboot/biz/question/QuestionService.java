@@ -3,9 +3,11 @@ package com.springboot.biz.question;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+//페이지네이션 import
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 import com.springboot.biz.DataNotFoundException;
@@ -25,15 +27,18 @@ public class QuestionService {
 		q.setCreateDate(LocalDateTime.now());
 		this.questionRepository.save(q);
 	}
-	
+
 //	public List<Question> getList(){
-//		return this.questionRepository.findAll();
-//	}
-	
+//	    return this.questionRepository.findAll();
+//  }
+
 	public Page<Question> getList(int page) {
-	    Pageable pageable = PageRequest.of(page, 10);
+		//페이지당 보여주는 게시물의 갯수 수동설정
+	    Pageable pageable = PageRequest.of(page, 10); 
 	    return this.questionRepository.findAll(pageable);
 	}
+
+	
 
 	
 	public Question getQuestion(Integer id) {

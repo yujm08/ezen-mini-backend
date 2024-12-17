@@ -24,6 +24,15 @@ public class QuestionContorller {
 	
 	private final QuestionService questionService;
 	
+	//페이지네이션
+	@GetMapping("/list")
+	public String list(Model model,
+	                   @RequestParam(value = "page", defaultValue = "0") int page) {
+	    Page<Question> paging = this.questionService.getList(page);
+	    model.addAttribute("paging", paging);
+	    return "question_list";
+	}
+	
 	//유효성검사 하는 메소드
 	@PostMapping("/create")
 	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
@@ -49,13 +58,6 @@ public class QuestionContorller {
 //	}
 	
 
-	@GetMapping("/list")
-	public String list(Model model,
-	                   @RequestParam(value = "page", defaultValue = "0") int page) {
-	    Page<Question> paging = this.questionService.getList(page);
-	    model.addAttribute("paging", paging);
-	    return "question_list";
-	}
 
 	
 	@GetMapping("/detail/{id}")
