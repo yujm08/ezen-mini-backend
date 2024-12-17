@@ -19,7 +19,7 @@ class BoardApplicationTests {
 	@Test
 	void contextLoads() {
 		
-//		//DB에 데이터 넣기
+//		//DB에 데이터 대량 넣기
 //		for (int i=0; i<=300 ; i++) {
 //			String subject = String.format("테스트 데이트입니다[%03d]", i);
 //			String content = "내용 없음";
