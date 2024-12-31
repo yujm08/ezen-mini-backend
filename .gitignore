@@ -49,3 +49,20 @@ out/
 
 # Environment variables
 .env
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Maven 관련 파일 및 디렉토리
+target/
+*.log
+*.jar
+*.war
+*.ear
+*.class
+*.iml
+.mvn/
+!**/src/main/**
+!**/src/test/**
