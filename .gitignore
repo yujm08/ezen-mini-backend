@@ -17,14 +17,6 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
 
 ### NetBeans ###
 /nbproject/private/
@@ -76,3 +68,20 @@ planning.txt
 # Ignore directory
 tmp/
 tmp*/
+
+# Eclipse 관련 파일 
+.classpath
+.project
+.settings/
+bin/
+target/
+
+# IntelliJ
+.idea/
+.idea
+*.iml
+*.iws
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
