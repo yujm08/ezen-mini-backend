@@ -73,5 +73,6 @@ target/
 # Ignore planning file
 planning.txt
 
-# Ignore tmp directory
+# Ignore directory
 tmp/
+tmp*/
