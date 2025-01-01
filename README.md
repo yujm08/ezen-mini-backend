@@ -5,46 +5,51 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 API 문서: http://localhost:8080/v3/api-docs
 
 ## 패키지 구조
-com.springboot.board
-├── api
-│   └── v1
-│       ├── controller
-│       │   ├── QuestionController.java
-│       │   └── AnswerController.java
-│       └── dto
-│           ├── request
-│           │   ├── QuestionCreateRequest.java
-│           │   └── AnswerCreateRequest.java
-│           └── response
-│               ├── QuestionResponse.java
-│               └── AnswerResponse.java
-├── application
-│   ├── service
-│   │   ├── QuestionService.java
-│   │   └── AnswerService.java
-│   └── mapper
-│       ├── QuestionMapper.java
-│       └── AnswerMapper.java
-├── domain
-│   ├── entity
-│   │   ├── Question.java
-│   │   └── Answer.java
-│   └── repository
-│       ├── QuestionRepository.java
-│       └── AnswerRepository.java
-├── common
-│   ├── exception
-│   │   ├── DataNotFoundException.java
-│   │   └── GlobalExceptionHandler.java
-│   ├── response
-│   │   └── ApiResponse.java
-│   └── util
-│       └── DateTimeUtil.java
-└── config
-    ├── SwaggerConfig.java
-    ├── WebConfig.java
-    └── SecurityConfig.java
-
+```mermaid
+graph LR;
+    A[com.springboot.board] --> B[api]
+    B --> C[v1]
+    C --> D[controller]
+    D --> E[QuestionController.java]
+    D --> F[AnswerController.java]
+    C --> G[dto]
+    G --> H[request]
+    H --> I[QuestionCreateRequest.java]
+    H --> J[AnswerCreateRequest.java]
+    G --> K[response]
+    K --> L[QuestionResponse.java]
+    K --> M[AnswerResponse.java]
+    
+    A --> N[application]
+    N --> O[service]
+    O --> P[QuestionService.java]
+    O --> Q[AnswerService.java]
+    N --> R[mapper]
+    R --> S[QuestionMapper.java]
+    R --> T[AnswerMapper.java]
+    
+    A --> U[domain]
+    U --> V[entity]
+    V --> W[Question.java]
+    V --> X[Answer.java]
+    U --> Y[repository]
+    Y --> Z[QuestionRepository.java]
+    Y --> AA[AnswerRepository.java]
+    
+    A --> AB[common]
+    AB --> AC[exception]
+    AC --> AD[DataNotFoundException.java]
+    AC --> AE[GlobalExceptionHandler.java]
+    AB --> AF[response]
+    AF --> AG[ApiResponse.java]
+    AB --> AH[util]
+    AH --> AI[DateTimeUtil.java]
+    
+    A --> AJ[config]
+    AJ --> AK[SwaggerConfig.java]
+    AJ --> AL[WebConfig.java]
+    AJ --> AM[SecurityConfig.java]
+```
 
 ## Answer 데이터 흐름 다이어그램
 
