@@ -4,6 +4,46 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 ## Swagger API 문서
 API 문서: http://localhost:8080/v3/api-docs
 
+## 패키지 구조
+com.springboot.board
+├── api
+│   └── v1
+│       ├── controller
+│       │   ├── QuestionController.java
+│       │   └── AnswerController.java
+│       └── dto
+│           ├── request
+│           │   ├── QuestionCreateRequest.java
+│           │   └── AnswerCreateRequest.java
+│           └── response
+│               ├── QuestionResponse.java
+│               └── AnswerResponse.java
+├── application
+│   ├── service
+│   │   ├── QuestionService.java
+│   │   └── AnswerService.java
+│   └── mapper
+│       ├── QuestionMapper.java
+│       └── AnswerMapper.java
+├── domain
+│   ├── entity
+│   │   ├── Question.java
+│   │   └── Answer.java
+│   └── repository
+│       ├── QuestionRepository.java
+│       └── AnswerRepository.java
+├── common
+│   ├── exception
+│   │   ├── DataNotFoundException.java
+│   │   └── GlobalExceptionHandler.java
+│   ├── response
+│   │   └── ApiResponse.java
+│   └── util
+│       └── DateTimeUtil.java
+└── config
+    ├── SwaggerConfig.java
+    ├── WebConfig.java
+    └── SecurityConfig.java
 
 
 ## Answer 데이터 흐름 다이어그램
