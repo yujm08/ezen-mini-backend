@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import com.springboot.board.application.service.QuestionService;
-import com.springboot.board.api.v1.dto.response.ApiResponse;
+import com.springboot.board.common.response.ApiResponse;
 import com.springboot.board.api.v1.dto.request.QuestionCreateRequest;
 import com.springboot.board.api.v1.dto.response.QuestionResponse;
 import org.springframework.data.domain.Page;
