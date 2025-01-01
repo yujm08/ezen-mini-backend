@@ -20,7 +20,7 @@ public interface AnswerMapper {
     AnswerResponse toResponse(Answer answer);
     
     // questionId를 기반으로 Question 객체를 생성하는 기본 메서드
-    default Question mapQuestion(Long questionId) {
+    default Question mapQuestion(Integer questionId) {
         // Question 객체를 빌더 패턴을 사용하여 생성
         return Question.builder()
                 .subject("") // 질문의 제목을 빈 문자열로 초기화
