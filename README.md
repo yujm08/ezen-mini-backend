@@ -1,9 +1,8 @@
-## 시퀀스 다이어그램
-<br>
+## Answer 시퀀스 다이어그램
 
 
-'''mermaid
-sequenceDiagram
+```mermaid
+  sequenceDiagram
     Client->>+AnswerController: POST /api/v1/answers
     Note over Client,AnswerController: @RequestBody AnswerCreateRequest
     
@@ -24,4 +23,15 @@ sequenceDiagram
     
     AnswerController-->>-Client: ApiResponse<AnswerResponse>
     Note over Client,AnswerController: HTTP 201 Created
+```
+<br>
+<br>
+
+
+## Question 시퀀스 다이어그램
+
+``` mermaid
+  sequenceDiagram
+
+  
 ```
