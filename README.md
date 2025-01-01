@@ -1,37 +1,39 @@
 ## Answer 시퀀스 다이어그램
 
-
 ```mermaid
-  sequenceDiagram
-    Client->>+AnswerController: POST /api/v1/answers
-    Note over Client,AnswerController: @RequestBody AnswerCreateRequest
+%%{init: {'theme': 'dark'}}%%
+sequenceDiagram
+    participant C as Client
+    participant AC as AnswerController
+    participant AS as AnswerService
+    participant AM as AnswerMapper
+    participant AR as AnswerRepository
     
-    AnswerController->>+AnswerService: createAnswer(request)
+    rect rgb(40, 44, 52)
+        C->>+AC: POST /api/v1/answers
+        Note over C,AC: @RequestBody AnswerCreateRequest
+    end
     
-    AnswerService->>+AnswerMapper: toEntity(request)
-    Note over AnswerMapper: DTO를 Entity로 변환
-    AnswerMapper-->>-AnswerService: Answer Entity
+    rect rgb(47, 79, 79)
+        AC->>+AS: createAnswer(request)
+        
+        AS->>+AM: toEntity(request)
+        Note over AM: DTO를 Entity로 변환
+        AM-->>-AS: Answer Entity
+        
+        AS->>+AR: save(answer)
+        AR-->>-AS: Saved Answer Entity
+        
+        AS->>+AM: toResponse(savedAnswer)
+        Note over AM: Entity를 DTO로 변환
+        AM-->>-AS: AnswerResponse
+        
+        AS-->>-AC: AnswerResponse
+    end
     
-    AnswerService->>+AnswerRepository: save(answer)
-    AnswerRepository-->>-AnswerService: Saved Answer Entity
-    
-    AnswerService->>+AnswerMapper: toResponse(savedAnswer)
-    Note over AnswerMapper: Entity를 DTO로 변환
-    AnswerMapper-->>-AnswerService: AnswerResponse
-    
-    AnswerService-->>-AnswerController: AnswerResponse
-    
-    AnswerController-->>-Client: ApiResponse<AnswerResponse>
-    Note over Client,AnswerController: HTTP 201 Created
+    rect rgb(40, 44, 52)
+        AC-->>-C: ApiResponse<AnswerResponse>
+        Note over C,AC: HTTP 201 Created
+    end
 ```
-<br>
-<br>
 
-
-## Question 시퀀스 다이어그램
-
-``` mermaid
-  sequenceDiagram
-
-  
-```
