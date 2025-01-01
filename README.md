@@ -1,4 +1,4 @@
-## Answer 시퀀스 다이어그램
+## Answer 데이터 흐름 다이어그램
 
 ```mermaid
 %%{init: {'theme': 'dark'}}%%
@@ -9,31 +9,25 @@ sequenceDiagram
     participant AM as AnswerMapper
     participant AR as AnswerRepository
     
-    rect rgb(40, 44, 52)
-        C->>+AC: POST /api/v1/answers
-        Note over C,AC: @RequestBody AnswerCreateRequest
-    end
+    C->>+AC: POST /api/v1/answers
+    Note over C,AC: @RequestBody AnswerCreateRequest
+    Note right of C: { "content": "답변 내용", "questionId": 1 }
     
-    rect rgb(47, 79, 79)
-        AC->>+AS: createAnswer(request)
-        
-        AS->>+AM: toEntity(request)
-        Note over AM: DTO를 Entity로 변환
-        AM-->>-AS: Answer Entity
-        
-        AS->>+AR: save(answer)
-        AR-->>-AS: Saved Answer Entity
-        
-        AS->>+AM: toResponse(savedAnswer)
-        Note over AM: Entity를 DTO로 변환
-        AM-->>-AS: AnswerResponse
-        
-        AS-->>-AC: AnswerResponse
-    end
+    AC->>+AS: createAnswer(request)
     
-    rect rgb(40, 44, 52)
-        AC-->>-C: ApiResponse<AnswerResponse>
-        Note over C,AC: HTTP 201 Created
-    end
+    AS->>+AM: toEntity(request)
+    Note over AM: DTO를 Entity로 변환
+    AM-->>-AS: Answer Entity
+    
+    AS->>+AR: save(answer)
+    Note over AR: 데이터베이스에 저장
+    AR-->>-AS: Saved Answer Entity
+    
+    AS->>+AM: toResponse(savedAnswer)
+    Note over AM: Entity를 DTO로 변환
+    AM-->>-AS: AnswerResponse
+    
+    AS-->>-AC: AnswerResponse
+    AC-->>-C: ApiResponse<AnswerResponse>
 ```
 
