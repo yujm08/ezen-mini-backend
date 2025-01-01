@@ -1,4 +1,4 @@
-package com.springboot.biz;
+package com.springboot.board.api.v1.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

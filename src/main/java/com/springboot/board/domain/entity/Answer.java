@@ -27,7 +27,7 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // 답변의 고유 ID
+    private Integer id; // 답변의 고유 ID
     
     @Column(columnDefinition = "TEXT")
     private String content; // 답변의 내용

@@ -16,8 +16,11 @@ public class AnswerController {
     private final AnswerService answerService;
     
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    // HTTP POST 요청을 처리하여 새로운 답변을 생성하는 메서드
+    @ResponseStatus(HttpStatus.CREATED) // 성공적으로 생성된 경우 201 CREATED 상태 코드를 반환
     public ApiResponse<AnswerResponse> createAnswer(@Valid @RequestBody AnswerCreateRequest request) {
+        
+        // 요청을 기반으로 답변을 생성하고 ApiResponse로 성공 결과를 반환
         return ApiResponse.success(answerService.createAnswer(request));
     }
 } 
