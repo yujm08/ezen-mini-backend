@@ -2,9 +2,6 @@ package com.springboot.board.domain.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.ArrayList;
-
-import com.springboot.biz.answer.Answer;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
