@@ -24,7 +24,7 @@ public class SwaggerConfig {
     public OpenAPI openAPI() {
         Info info = new Info()
                 .title("EZEN학원 A조 API 설명서")
-                .version("v1.0.0")
+                .version("v2.0.0")
                 .description("Spring Boot Board REST API 문서")
                 .contact(new Contact()
                         .name("Board")
