@@ -15,32 +15,33 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class SwaggerConfig {
-    
-    /**
-     * OpenAPI 객체를 생성하는 메서드
-     * @return OpenAPI 객체로 API 문서화 정보를 포함합니다.
-     */
-    @Bean
-    public OpenAPI openAPI() {
-        Info info = new Info()
-                .title("EZEN학원 A조 API 설명서")
-                .version("v2.0.0")
-                .description("Spring Boot Board REST API 문서")
-                .contact(new Contact()
-                        .name("Board")
-                        .email("your.email@example.com")
-                        .url("https://github.com/yourusername/board"))
-                .license(new License()
-                        .name("Apache License Version 2.0")
-                        .url("http://www.apache.org/licenses/LICENSE-2.0"));
 
-        return new OpenAPI()
-                .info(info)
-                .components(new Components()
-                        .addSecuritySchemes("bearer-key",
-                                new SecurityScheme()
-                                        .type(SecurityScheme.Type.HTTP)
-                                        .scheme("bearer")
-                                        .bearerFormat("JWT")));
-    }
-} 
+        /**
+         * OpenAPI 객체를 생성하는 메서드
+         * 
+         * @return OpenAPI 객체로 API 문서화 정보를 포함합니다.
+         */
+        @Bean
+        public OpenAPI openAPI() {
+                Info info = new Info()
+                                .title("EZEN학원 A조 API 설명서")
+                                .version("v2.0.0")
+                                .description("Spring Boot Board REST API 문서")
+                                .contact(new Contact()
+                                                .name("깃허브소스코드 바로가기")
+                                                .email("stable.luckychu@gmail.com")
+                                                .url("https://github.com/joshbae119/ezen-mini-backend.git"))
+                                .license(new License()
+                                                .name("Apache License Version 2.0")
+                                                .url("http://www.apache.org/licenses/LICENSE-2.0"));
+
+                return new OpenAPI()
+                                .info(info)
+                                .components(new Components()
+                                                .addSecuritySchemes("bearer-key",
+                                                                new SecurityScheme()
+                                                                                .type(SecurityScheme.Type.HTTP)
+                                                                                .scheme("bearer")
+                                                                                .bearerFormat("JWT")));
+        }
+}
