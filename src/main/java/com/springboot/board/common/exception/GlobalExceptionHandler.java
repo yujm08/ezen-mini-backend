@@ -1,24 +1,58 @@
 package com.springboot.board.common.exception;
 
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import com.springboot.board.common.response.ErrorResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import com.springboot.board.common.response.ApiResponse;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice  // 모든 컨트롤러에서 발생하는 예외를 처리하기 위한 클래스
+@Slf4j
+@RestControllerAdvice
 public class GlobalExceptionHandler {
-    
-    @ExceptionHandler(DataNotFoundException.class)  // DataNotFoundException 예외를 처리하는 메서드
-    @ResponseStatus(HttpStatus.NOT_FOUND)  // HTTP 404 상태 코드 반환
-    public ApiResponse<Void> handleDataNotFoundException(DataNotFoundException e) {
-        return ApiResponse.error(e.getMessage());  // 예외 메시지를 포함한 에러 응답 반환
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleDataNotFoundException(
+            DataNotFoundException e, HttpServletRequest request) {
+        log.error("DataNotFoundException: {}", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ErrorResponse.of(
+                    HttpStatus.NOT_FOUND.value(),
+                    "Not Found",
+                    e.getMessage(),
+                    request.getRequestURI()
+                ));
     }
-    
-    @ExceptionHandler(MethodArgumentNotValidException.class)  // 유효성 검사 실패 예외를 처리하는 메서드
-    @ResponseStatus(HttpStatus.BAD_REQUEST)  // HTTP 400 상태 코드 반환
-    public ApiResponse<Void> handleValidationException(MethodArgumentNotValidException e) {
-        return ApiResponse.error("유효성 검사 실패");  // 유효성 검사 실패 메시지를 포함한 에러 응답 반환
+
+    @ExceptionHandler(BindException.class)
+    public ResponseEntity<ErrorResponse> handleBindException(
+            BindException e, HttpServletRequest request) {
+        log.error("Validation error: {}", e.getMessage());
+        String message = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ErrorResponse.of(
+                    HttpStatus.BAD_REQUEST.value(),
+                    "Bad Request",
+                    message,
+                    request.getRequestURI()
+                ));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(
+            Exception e, HttpServletRequest request) {
+        log.error("Internal server error: {}", e.getMessage(), e);
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ErrorResponse.of(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Internal Server Error",
+                    "서버 내부 오류가 발생했습니다.",
+                    request.getRequestURI()
+                ));
     }
 } 
