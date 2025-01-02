@@ -48,10 +48,6 @@ jobs:
             fi
           EOF
 
-      - name: Copy application.properties
-        run: |
-          ssh $USER@$HOST "cp ~/application.properties.backup /home/ubuntu/ezen-mini-backend/src/main/resources/application.properties"
-
       - name: Clean Maven Project
         run: |
           ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn clean"
