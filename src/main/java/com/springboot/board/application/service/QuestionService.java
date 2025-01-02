@@ -75,5 +75,11 @@ public class QuestionService {
         // 조회된 질문을 QuestionResponse DTO로 변환하여 반환
         return questionMapper.toResponse(question);
     }
+
+    // Entity 조회를 위한 메서드 추가
+    public Question getQuestionEntity(Integer id) {
+        return questionRepository.findById(id.longValue())
+            .orElseThrow(() -> new DataNotFoundException("질문을 찾을 수 없습니다."));
+    }
 }
 

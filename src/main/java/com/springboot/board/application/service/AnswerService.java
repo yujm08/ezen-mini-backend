@@ -4,11 +4,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import com.springboot.board.domain.repository.AnswerRepository;
+import com.springboot.board.api.v1.dto.request.AnswerCreateRequest;
 import com.springboot.board.api.v1.dto.response.AnswerResponse;
 import com.springboot.board.application.mapper.AnswerMapper;
-import com.springboot.board.api.v1.dto.request.AnswerCreateRequest;
-import com.springboot.board.domain.entity.Answer;  
-
+import com.springboot.board.domain.entity.Answer;
 
 // AnswerService 클래스는 답변 관련 비즈니스 로직을 처리하는 서비스 클래스
 @Service
@@ -17,12 +16,13 @@ import com.springboot.board.domain.entity.Answer;
 public class AnswerService {
     private final AnswerRepository answerRepository; 
     private final AnswerMapper answerMapper; 
+    private final QuestionService questionService;
     
     @Transactional // 트랜잭션을 사용하여 데이터베이스 작업을 수행
     public AnswerResponse createAnswer(AnswerCreateRequest request) {
 
         // AnswerCreateRequest를 Answer 엔티티로 변환
-        Answer answer = answerMapper.toEntity(request);
+        Answer answer = answerMapper.toEntity(request, questionService);
 
         // 변환된 Answer 엔티티를 데이터베이스에 저장
         Answer savedAnswer = answerRepository.save(answer);
