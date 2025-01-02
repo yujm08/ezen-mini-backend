@@ -6,6 +6,10 @@
 - 수업내용을 원본으로 API server 구현 리팩토링
 - Vscode , intellij 둘다 사용 가능
 
+## API 문서
+- Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- API 문서: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
 ## 기술 스택
 
 - Java 17
@@ -42,21 +46,6 @@
    ```bash
    mvn spring-boot:run
    ```
-
-## API 문서
-
-- Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
-- API 문서: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
-
-## 패키지 구조
-
-## Swagger UI
-
-Swagger UI: http://localhost:8080/swagger-ui/index.html
-
-## Swagger API 문서
-
-API 문서: http://localhost:8080/v3/api-docs
 
 ## 패키지 구조
 
@@ -109,7 +98,6 @@ graph LR;
 ## Question 시퀀스
 
 ```mermaid
-%%{init: {'theme': 'dark'}}%%
 sequenceDiagram
     participant C as Client
     participant QC as QuestionController
@@ -145,7 +133,6 @@ sequenceDiagram
 ## Answer 시퀀스
 
 ```mermaid
-%%{init: {'theme': 'dark'}}%%
 sequenceDiagram
     participant C as Client
     participant AC as AnswerController
