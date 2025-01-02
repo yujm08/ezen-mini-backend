@@ -13,8 +13,8 @@ jobs:
     environment: EZEN
 
     env:
-      HOST: ${{ secrets.EC2_EZEN_SPRING_HOST }}
-      USER: ${{ secrets.EC2_EZEN_SPRING_USER }}
+      HOST: ${{ secrets.EC2_EZEN_HOST }}
+      USER: ${{ secrets.EC2_EZEN_USER }}
 
     steps:
       - name: Checkout Repository
@@ -22,17 +22,20 @@ jobs:
 
       - name: Configure SSH Key
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_EZEN_SPRING_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_EZEN_KEY }}
         run: |
-          set -e  # 에러 발생 시 즉시 중단
-          mkdir -p ~/.ssh  # ~/.ssh 디렉토리 생성 (이미 존재해도 진행)
+          mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
+          if [ -z "$HOST" ]; then
+            echo "Error: HOST environment variable is not set"
+            exit 1
+          fi
+          echo "Running ssh-keyscan for host: $HOST"
+          ssh-keyscan "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
 
       - name: Update Source Code on EC2
         run: |
-          set -e  # 에러 발생 시 즉시 중단
           ssh $USER@$HOST << 'EOF'
             if [ ! -d /home/ubuntu/ezen-mini-backend ]; then
               echo "Directory not found. Cloning repository..."
@@ -47,40 +50,27 @@ jobs:
 
       - name: Copy application.properties
         run: |
-          set -e
           ssh $USER@$HOST "cp ~/application.properties.backup /home/ubuntu/ezen-mini-backend/src/main/resources/application.properties"
 
       - name: Clean Maven Project
         run: |
-          set -e
           ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn clean"
 
       - name: Build Maven Project
         run: |
-          set -e
           ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn package -DskipTests"
 
       - name: Run Tests
         run: |
-          set -e
           ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn test"
 
       - name: Deploy Application
         run: |
-          set -e
           ssh $USER@$HOST '
             cd /home/ubuntu/ezen-mini-backend
-            
-            # 기존 프로세스 종료
             pid=$(pgrep -f Board-0.0.1-SNAPSHOT.jar) && kill -9 $pid || true
-            
-            # 잠시 대기 (프로세스 종료 대기)
             sleep 5
-            
-            # 새 애플리케이션 실행
             nohup java -jar target/Board-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
-            
-            # 로그 확인
             echo "Application deployed. Checking logs..."
             tail -f app.log &
           '
