@@ -1,9 +1,13 @@
 package com.springboot.board.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * SwaggerConfig 클래스는 Swagger(OpenAPI) 설정을 위한 구성 클래스
@@ -18,10 +22,25 @@ public class SwaggerConfig {
      */
     @Bean
     public OpenAPI openAPI() {
+        Info info = new Info()
+                .title("EZEN학원 A조 API 설명서")
+                .version("v1.0.0")
+                .description("Spring Boot Board REST API 문서")
+                .contact(new Contact()
+                        .name("Board")
+                        .email("your.email@example.com")
+                        .url("https://github.com/yourusername/board"))
+                .license(new License()
+                        .name("Apache License Version 2.0")
+                        .url("http://www.apache.org/licenses/LICENSE-2.0"));
+
         return new OpenAPI()
-                .info(new Info()
-                        .title("Board API")  
-                        .version("1.0")  
-                        .description("Board API Documentation"));  
+                .info(info)
+                .components(new Components()
+                        .addSecuritySchemes("bearer-key",
+                                new SecurityScheme()
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")));
     }
 } 
