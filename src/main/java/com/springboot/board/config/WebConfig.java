@@ -19,9 +19,10 @@ public class WebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addCorsMappings(@NonNull CorsRegistry registry) {
-        registry.addMapping("/api/**")  // API 경로에 대한 CORS 매핑
-                .allowedOrigins("http://localhost:3000")  // Next.js 프론트엔드의 출처 허용
-                .allowedMethods("GET", "POST", "PUT", "DELETE")  // 허용할 HTTP 메서드
-                .allowCredentials(true);  // 자격 증명 허용: 클라이언트가 쿠키, 인증 헤더 또는 TLS 인증서를 포함하여 요청을 보낼 수 있도록 허용
+        // 모든 경로에 대한 CORS 설정
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:3000")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowCredentials(true);
     }
 } 

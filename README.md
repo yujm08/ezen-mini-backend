@@ -7,6 +7,7 @@
 - Vscode , intellij 둘다 사용 가능
 
 ## API 문서
+
 - Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 - API 문서: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
@@ -50,50 +51,79 @@
 ## 패키지 구조
 
 ```mermaid
-graph LR;
+graph LR
     A[com.springboot.board] --> B[api]
     B --> C[v1]
     C --> D[controller]
-    D --> E[QuestionController.java]
-    D --> F[AnswerController.java]
+    D --> E[QuestionController]
+    D --> F[AnswerController]
     C --> G[dto]
     G --> H[request]
-    H --> I[QuestionCreateRequest.java]
-    H --> J[AnswerCreateRequest.java]
+    H --> I[QuestionCreateRequest]
+    H --> J[AnswerCreateRequest]
     G --> K[response]
-    K --> L[QuestionResponse.java]
-    K --> M[AnswerResponse.java]
+    K --> L[QuestionResponse]
+    K --> M[AnswerResponse]
 
-    A --> N[application]
-    N --> O[service]
-    O --> P[QuestionService.java]
-    O --> Q[AnswerService.java]
-    N --> R[mapper]
-    R --> S[QuestionMapper.java]
-    R --> T[AnswerMapper.java]
+    A --> N[web]
+    N --> O[controller]
+    O --> P[MainController]
+
+    A --> Q[application]
+    Q --> R[service]
+    R --> S[QuestionService]
+    R --> T[AnswerService]
 
     A --> U[domain]
     U --> V[entity]
-    V --> W[Question.java]
-    V --> X[Answer.java]
+    V --> W[Question]
+    V --> X[Answer]
     U --> Y[repository]
-    Y --> Z[QuestionRepository.java]
-    Y --> AA[AnswerRepository.java]
+    Y --> Z[QuestionRepository]
+    Y --> AA[AnswerRepository]
 
     A --> AB[common]
     AB --> AC[exception]
-    AC --> AD[DataNotFoundException.java]
-    AC --> AE[GlobalExceptionHandler.java]
+    AC --> AD[DataNotFoundException]
+    AC --> AE[GlobalExceptionHandler]
     AB --> AF[response]
-    AF --> AG[ApiResponse.java]
+    AF --> AG[ApiResponse]
     AB --> AH[util]
-    AH --> AI[DateTimeUtil.java]
+    AH --> AI[DateTimeUtil]
 
-    A --> AJ[config]
-    AJ --> AK[SwaggerConfig.java]
-    AJ --> AL[WebConfig.java]
-    AJ --> AM[SecurityConfig.java]
+    A --> AJ[mapper]
+    AJ --> AK[QuestionMapper]
+    AJ --> AL[AnswerMapper]
+
+    A --> AM[config]
+    AM --> AN[WebConfig]
+    AM --> AO[SwaggerConfig]
+    AM --> AP[SecurityConfig]
 ```
+
+## 패키지 설명
+
+- `api`: REST API 관련 컴포넌트
+
+  - `v1`: API 버전 1
+    - `controller`: API 컨트롤러
+    - `dto`: 데이터 전송 객체
+      - `request`: 요청 DTO
+      - `response`: 응답 DTO
+
+- `web`: 웹 MVC 관련 컴포넌트
+  - `controller`: 웹 컨트롤러
+- `application`: 비즈니스 로직
+  - `service`: 서비스 계층
+- `domain`: 도메인 모델
+  - `entity`: JPA 엔티티
+  - `repository`: 데이터 접근 계층
+- `common`: 공통 컴포넌트
+  - `exception`: 예외 처리
+  - `response`: 응답 관련
+  - `util`: 유틸리티
+- `mapper`: DTO-엔티티 변환
+- `config`: 설정 클래스
 
 ## Question 시퀀스
 

@@ -1,13 +1,13 @@
 spring:
   application:
     name: Board
-    
+
   datasource:
     url: ${DB_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    
+
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     properties:
@@ -28,4 +28,6 @@ springdoc:
   api-docs:
     path: /v3/api-docs
     enabled: true
-  packages-to-scan: com.springboot.board.api.v1.controller 
+  packages-to-scan:
+    - com.springboot.board.api.v1.controller
+    - com.springboot.board.web.controller
