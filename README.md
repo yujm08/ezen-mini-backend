@@ -1,6 +1,7 @@
 # EZEN Mini 프로젝트 백엔드
 
-## 설명
+
+### 설명
 
 - Ezen Boot Camp mini 프로젝트 백엔드 파트
 - 수업내용을 원본으로 API server 구현 리팩토링
@@ -9,6 +10,14 @@
 - RESTful API 설계 원칙 준수
 - 표준화된 응답 형식과 에러 처리
 - Swagger를 통한 API 문서화
+
+### author: 
+- Chulho BAE
+
+### Verion:
+- 2.0.0 (2025-01-02) - 표준화로의 노력
+- 1.0.0 (2025-01-01) - 기본형
+
 
 ## API 문서
 
