@@ -17,6 +17,16 @@ spring:
     hibernate:
       ddl-auto: update
 
+  jackson:
+    serialization:
+      "[WRITE_DATES_AS_TIMESTAMPS]": ${JACKSON_WRITE_DATES_AS_TIMESTAMPS}
+      "[FAIL_ON_EMPTY_BEANS]": ${JACKSON_FAIL_ON_EMPTY_BEANS}
+    deserialization:
+      "[FAIL_ON_UNKNOWN_PROPERTIES]": ${JACKSON_FAIL_ON_UNKNOWN_PROPERTIES}
+    default-property-inclusion: ${JACKSON_DEFAULT_PROPERTY_INCLUSION}
+    time-zone: ${TZ}
+    date-format: yyyy-MM-dd HH:mm:ss
+
 server:
   port: 8080
   servlet:

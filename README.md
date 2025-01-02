@@ -5,6 +5,10 @@
 - Ezen Boot Camp mini 프로젝트 백엔드 파트
 - 수업내용을 원본으로 API server 구현 리팩토링
 - Vscode , intellij 둘다 사용 가능
+- Spring Boot를 사용한 질문-답변 게시판 API 서버
+- RESTful API 설계 원칙 준수
+- 표준화된 응답 형식과 에러 처리
+- Swagger를 통한 API 문서화
 
 ## API 문서
 
@@ -18,7 +22,8 @@
 - MySQL
 - Maven
 - Lombok
-- Swagger
+- Swagger (SpringDoc OpenAPI)
+- MapStruct
 
 ## 설치 및 실행 방법
 
@@ -32,16 +37,21 @@
 2. 프로젝트 클론:
 
    ```bash
-   git clone [프로젝트의 Git 저장소 URL]
+   git clone https://github.com/joshbae119/ezen-mini-backend.git
    ```
 
 3. 의존성 설치:
 
-   ```bash
-   # .env 파일 생성해야 빌드가 됨
-   cd [프로젝트 디렉토리]
-   mvn clean install
-   ```
+   # Jackson Configuration (.env)
+
+   JACKSON_WRITE_DATES_AS_TIMESTAMPS=false
+   JACKSON_FAIL_ON_EMPTY_BEANS=false
+   JACKSON_FAIL_ON_UNKNOWN_PROPERTIES=false
+   JACKSON_DEFAULT_PROPERTY_INCLUSION=NON_NULL
+
+   # Timezone (.env)
+
+   TZ=Asia/Seoul
 
 4. 애플리케이션 실행:
    ```bash
@@ -65,10 +75,6 @@ graph LR
     K --> L[QuestionResponse]
     K --> M[AnswerResponse]
 
-    A --> N[web]
-    N --> O[controller]
-    O --> P[MainController]
-
     A --> Q[application]
     Q --> R[service]
     R --> S[QuestionService]
@@ -91,13 +97,13 @@ graph LR
     AF --> AH[GlobalExceptionHandler]
     AE --> AI[response]
     AI --> AJ[ApiResponse]
-    AE --> AK[util]
-    AK --> AL[DateTimeUtil]
+    AI --> AK[ErrorResponse]
 
     A --> AM[config]
     AM --> AN[WebConfig]
     AM --> AO[SwaggerConfig]
-    AM --> AP[SecurityConfig]
+    AM --> AP[JacksonConfig]
+    AM --> AQ[JpaConfig]
 ```
 
 ## 패키지 설명
@@ -107,16 +113,40 @@ graph LR
 REST API 관련 컴포넌트를 포함
 
 - `v1`: API 버전 1
-  - `controller`: REST API 엔드포인트 처리
+  - `controller`: REST API 엔드포인트 처리 (QuestionController, AnswerController)
   - `dto`: 데이터 전송 객체
-    - `request`: 클라이언트 요청 데이터
-    - `response`: 클라이언트 응답 데이터
+    - `request`: 클라이언트 요청 데이터 (QuestionCreateRequest, AnswerCreateRequest)
+    - `response`: 클라이언트 응답 데이터 (QuestionResponse, AnswerResponse)
 
-### web
+### application
 
-웹 MVC 관련 컴포넌트
+비즈니스 로직 처리 계층
 
-- `controller`: 웹 요청 처리 컨트롤러
+- `service`: 비즈니스 로직 구현 (QuestionService, AnswerService)
+- `mapper`: DTO-Entity 변환 처리 (QuestionMapper, AnswerMapper)
+
+### domain
+
+핵심 비즈니스 로직과 엔티티 정의
+
+- `entity`: JPA 엔티티 클래스 (Question, Answer)
+- `repository`: 데이터 접근 계층 (QuestionRepository, AnswerRepository)
+
+### common
+
+공통 유틸리티 및 설정
+
+- `exception`: 예외 처리 관련 클래스 (DataNotFoundException, GlobalExceptionHandler)
+- `response`: 표준 응답 형식 정의 (ApiResponse, ErrorResponse)
+
+### config
+
+애플리케이션 설정 클래스
+
+- WebConfig: CORS 설정
+- SwaggerConfig: API 문서화 설정
+- JacksonConfig: JSON 직렬화 설정
+- JpaConfig: JPA 관련 설정
 
 ## Question 시퀀스
 
