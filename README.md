@@ -40,23 +40,30 @@
    git clone https://github.com/joshbae119/ezen-mini-backend.git
    ```
 
-3. 의존성 설치:
+3. 애플리케이션 실행:
 
-   # Jackson Configuration (.env)
-
-   JACKSON_WRITE_DATES_AS_TIMESTAMPS=false
-   JACKSON_FAIL_ON_EMPTY_BEANS=false
-   JACKSON_FAIL_ON_UNKNOWN_PROPERTIES=false
-   JACKSON_DEFAULT_PROPERTY_INCLUSION=NON_NULL
-
-   # Timezone (.env)
-
-   TZ=Asia/Seoul
-
-4. 애플리케이션 실행:
    ```bash
+   mvn clean install
    mvn spring-boot:run
    ```
+
+4. 의존성 설치 (.env 파일 생성):
+
+
+    Data Base
+   - DB_URL=
+   - DB_USERNAME=
+   - DB_PASSWORD=
+
+   Jackson Configuration
+   - JACKSON_WRITE_DATES_AS_TIMESTAMPS=false
+   - JACKSON_FAIL_ON_EMPTY_BEANS=false
+   - JACKSON_FAIL_ON_UNKNOWN_PROPERTIES=false
+   - JACKSON_DEFAULT_PROPERTY_INCLUSION=NON_NULL
+
+   Timezone
+   - TZ=Asia/Seoul
+
 
 ## 패키지 구조
 
