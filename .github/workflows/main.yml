@@ -83,4 +83,4 @@ jobs:
             # 로그 확인 (마지막 10줄만)
             echo "Recent application logs:"
             tail -n 10 app.log
-EOF
+          EOF
