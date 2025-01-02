@@ -14,9 +14,10 @@ import org.springframework.data.domain.Sort;
 import com.springboot.board.domain.repository.QuestionRepository;
 import com.springboot.board.api.v1.dto.request.QuestionCreateRequest;
 import com.springboot.board.api.v1.dto.response.QuestionResponse;
+import com.springboot.board.application.mapper.QuestionMapper;
 import com.springboot.board.domain.entity.Question;
 import com.springboot.board.common.exception.DataNotFoundException;
-import com.springboot.board.mapper.QuestionMapper;
+
 import org.springframework.data.domain.PageRequest;
 
 @Service

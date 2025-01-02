@@ -5,8 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import com.springboot.board.domain.repository.AnswerRepository;
 import com.springboot.board.api.v1.dto.response.AnswerResponse;
+import com.springboot.board.application.mapper.AnswerMapper;
 import com.springboot.board.api.v1.dto.request.AnswerCreateRequest;
-import com.springboot.board.mapper.AnswerMapper;
 import com.springboot.board.domain.entity.Answer;  
 
 

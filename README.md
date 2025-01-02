@@ -73,27 +73,26 @@ graph LR
     Q --> R[service]
     R --> S[QuestionService]
     R --> T[AnswerService]
+    Q --> U[mapper]
+    U --> V[QuestionMapper]
+    U --> W[AnswerMapper]
 
-    A --> U[domain]
-    U --> V[entity]
-    V --> W[Question]
-    V --> X[Answer]
-    U --> Y[repository]
-    Y --> Z[QuestionRepository]
-    Y --> AA[AnswerRepository]
+    A --> X[domain]
+    X --> Y[entity]
+    Y --> Z[Question]
+    Y --> AA[Answer]
+    X --> AB[repository]
+    AB --> AC[QuestionRepository]
+    AB --> AD[AnswerRepository]
 
-    A --> AB[common]
-    AB --> AC[exception]
-    AC --> AD[DataNotFoundException]
-    AC --> AE[GlobalExceptionHandler]
-    AB --> AF[response]
-    AF --> AG[ApiResponse]
-    AB --> AH[util]
-    AH --> AI[DateTimeUtil]
-
-    A --> AJ[mapper]
-    AJ --> AK[QuestionMapper]
-    AJ --> AL[AnswerMapper]
+    A --> AE[common]
+    AE --> AF[exception]
+    AF --> AG[DataNotFoundException]
+    AF --> AH[GlobalExceptionHandler]
+    AE --> AI[response]
+    AI --> AJ[ApiResponse]
+    AE --> AK[util]
+    AK --> AL[DateTimeUtil]
 
     A --> AM[config]
     AM --> AN[WebConfig]
@@ -103,27 +102,21 @@ graph LR
 
 ## 패키지 설명
 
-- `api`: REST API 관련 컴포넌트
+### api
 
-  - `v1`: API 버전 1
-    - `controller`: API 컨트롤러
-    - `dto`: 데이터 전송 객체
-      - `request`: 요청 DTO
-      - `response`: 응답 DTO
+REST API 관련 컴포넌트를 포함
 
-- `web`: 웹 MVC 관련 컴포넌트
-  - `controller`: 웹 컨트롤러
-- `application`: 비즈니스 로직
-  - `service`: 서비스 계층
-- `domain`: 도메인 모델
-  - `entity`: JPA 엔티티
-  - `repository`: 데이터 접근 계층
-- `common`: 공통 컴포넌트
-  - `exception`: 예외 처리
-  - `response`: 응답 관련
-  - `util`: 유틸리티
-- `mapper`: DTO-엔티티 변환
-- `config`: 설정 클래스
+- `v1`: API 버전 1
+  - `controller`: REST API 엔드포인트 처리
+  - `dto`: 데이터 전송 객체
+    - `request`: 클라이언트 요청 데이터
+    - `response`: 클라이언트 응답 데이터
+
+### web
+
+웹 MVC 관련 컴포넌트
+
+- `controller`: 웹 요청 처리 컨트롤러
 
 ## Question 시퀀스
 
@@ -134,7 +127,9 @@ sequenceDiagram
     participant QS as QuestionService
     participant QM as QuestionMapper
     participant QR as QuestionRepository
+    participant DB as Database
 
+    %% 질문 생성 (POST)
     C->>+QC: POST /api/v1/questions
     Note over C,QC: @RequestBody QuestionCreateRequest
     Note right of C: { "subject": "질문 제목", "content": "질문 내용" }
@@ -142,15 +137,47 @@ sequenceDiagram
     QC->>+QS: createQuestion(request)
 
     QS->>+QM: toEntity(request)
-    Note over QM: DTO를 Entity로 변환
+    Note over QM: MapStruct를 사용하여<br/>DTO를 Entity로 변환
     QM-->>-QS: Question Entity
 
     QS->>+QR: save(question)
-    Note over QR: 데이터베이스에 저장
+    QR->>+DB: INSERT Question
+    DB-->>-QR: Saved Question Data
     QR-->>-QS: Saved Question Entity
 
     QS->>+QM: toResponse(savedQuestion)
     Note over QM: Entity를 DTO로 변환
+    QM-->>-QS: QuestionResponse
+
+    QS-->>-QC: QuestionResponse
+    QC-->>-C: ApiResponse<QuestionResponse>
+    Note right of C: { "success": true,<br/>"data": { "id": 1, "subject": "질문 제목", ... } }
+
+    %% 질문 목록 조회 (GET)
+    C->>+QC: GET /api/v1/questions?page=0
+    QC->>+QS: getQuestions(page)
+
+    QS->>+QR: findAll(pageable)
+    QR->>+DB: SELECT Questions
+    DB-->>-QR: Question List
+    QR-->>-QS: Page<Question>
+
+    QS->>+QM: map(questionMapper::toResponse)
+    QM-->>-QS: Page<QuestionResponse>
+
+    QS-->>-QC: Page<QuestionResponse>
+    QC-->>-C: ApiResponse<Page<QuestionResponse>>
+
+    %% 단일 질문 조회 (GET)
+    C->>+QC: GET /api/v1/questions/{id}
+    QC->>+QS: getQuestion(id)
+
+    QS->>+QR: findById(id)
+    QR->>+DB: SELECT Question
+    DB-->>-QR: Question Data
+    QR-->>-QS: Optional<Question>
+
+    QS->>+QM: toResponse(question)
     QM-->>-QS: QuestionResponse
 
     QS-->>-QC: QuestionResponse
@@ -168,8 +195,11 @@ sequenceDiagram
     participant AC as AnswerController
     participant AS as AnswerService
     participant AM as AnswerMapper
+    participant QS as QuestionService
     participant AR as AnswerRepository
+    participant DB as Database
 
+    %% 답변 생성 (POST)
     C->>+AC: POST /api/v1/answers
     Note over C,AC: @RequestBody AnswerCreateRequest
     Note right of C: { "content": "답변 내용", "questionId": 1 }
@@ -177,11 +207,17 @@ sequenceDiagram
     AC->>+AS: createAnswer(request)
 
     AS->>+AM: toEntity(request)
-    Note over AM: DTO를 Entity로 변환
+
+    AM->>+QS: mapQuestion(questionId)
+    Note over QS: Question 엔티티 조회
+    QS-->>-AM: Question Entity
+
+    Note over AM: MapStruct를 사용하여<br/>DTO를 Entity로 변환
     AM-->>-AS: Answer Entity
 
     AS->>+AR: save(answer)
-    Note over AR: 데이터베이스에 저장
+    AR->>+DB: INSERT Answer
+    DB-->>-AR: Saved Answer Data
     AR-->>-AS: Saved Answer Entity
 
     AS->>+AM: toResponse(savedAnswer)
@@ -190,4 +226,19 @@ sequenceDiagram
 
     AS-->>-AC: AnswerResponse
     AC-->>-C: ApiResponse<AnswerResponse>
+    Note right of C: { "success": true,<br/>"data": { "id": 1, "content": "답변 내용" } }
+
+    %% 예외 처리 시나리오
+    Note over C,DB: 질문이 존재하지 않는 경우
+    C->>+AC: POST /api/v1/answers
+    Note right of C: { "content": "답변 내용", "questionId": 999 }
+
+    AC->>+AS: createAnswer(request)
+    AS->>+AM: toEntity(request)
+    AM->>+QS: mapQuestion(questionId)
+    QS-->>-AM: throw DataNotFoundException
+    AM-->>-AS: Exception
+    AS-->>-AC: Exception
+    AC-->>-C: ApiResponse<Error>
+    Note right of C: { "success": false,<br/>"error": "질문을 찾을 수 없습니다." }
 ```

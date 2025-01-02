@@ -1,4 +1,4 @@
-package com.springboot.board.mapper;
+package com.springboot.board.application.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
