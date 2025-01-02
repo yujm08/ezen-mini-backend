@@ -1,3 +1,55 @@
+# EZEN Mini 프로젝트 백엔드
+
+## 설명
+
+- Ezen Boot Camp mini 프로젝트 백엔드 파트
+- 수업내용을 원본으로 API server 구현 리팩토링
+- Vscode , intellij 둘다 사용 가능
+
+## 기술 스택
+
+- Java 17
+- Spring Boot 3.1.5
+- MySQL
+- Maven
+- Lombok
+- Swagger
+
+## 설치 및 실행 방법
+
+1. 필요한 소프트웨어 설치:
+
+   - JDK 17 이상
+   - Maven
+   - MySQL
+   - Postman (필요시)
+
+2. 프로젝트 클론:
+
+   ```bash
+   git clone [프로젝트의 Git 저장소 URL]
+   ```
+
+3. 의존성 설치:
+
+   ```bash
+   # .env 파일 생성해야 빌드가 됨
+   cd [프로젝트 디렉토리]
+   mvn clean install
+   ```
+
+4. 애플리케이션 실행:
+   ```bash
+   mvn spring-boot:run
+   ```
+
+## API 문서
+
+- Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- API 문서: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+## 패키지 구조
+
 ## Swagger UI
 
 Swagger UI: http://localhost:8080/swagger-ui/index.html
@@ -54,7 +106,7 @@ graph LR;
     AJ --> AM[SecurityConfig.java]
 ```
 
-## Question 호출 시퀀스
+## Question 시퀀스
 
 ```mermaid
 %%{init: {'theme': 'dark'}}%%
@@ -90,7 +142,7 @@ sequenceDiagram
 <br>
 <br>
 
-## Answer 호출 시퀀스
+## Answer 시퀀스
 
 ```mermaid
 %%{init: {'theme': 'dark'}}%%
