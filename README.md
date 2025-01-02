@@ -13,7 +13,7 @@
 - CICD 구현 되어 있습니다. 이 부분 에러는 무시하세요.
 
 ### author: 
-- Chulho BAE
+- Ezen A Team
 
 ### Verion:
 - 2.0.1 (2025-01-02) - CICD 구현
