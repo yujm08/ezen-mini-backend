@@ -1,6 +1,5 @@
 # EZEN Mini 프로젝트 백엔드
 
-
 ### 설명
 
 - Ezen Boot Camp mini 프로젝트 백엔드 파트
@@ -12,14 +11,16 @@
 - Swagger를 통한 API 문서화
 - CICD 구현 되어 있습니다. 이 부분 에러는 무시하세요.
 
-### author: 
+### author:
+
 - Ezen A Team
 
 ### Verion:
+
+- 2.1.0 (2025-01-03) - Health Check 추가
 - 2.0.1 (2025-01-02) - CICD 구현
 - 2.0.0 (2025-01-02) - 표준화로의 노력
 - 1.0.0 (2025-01-01) - 기본형
-
 
 ## API 문서
 
@@ -60,21 +61,22 @@
 
 4. 의존성 설치 (.env 파일 생성):
 
+   Data Base
 
-    Data Base
    - DB_URL=
    - DB_USERNAME=
    - DB_PASSWORD=
 
    Jackson Configuration
+
    - JACKSON_WRITE_DATES_AS_TIMESTAMPS=false
    - JACKSON_FAIL_ON_EMPTY_BEANS=false
    - JACKSON_FAIL_ON_UNKNOWN_PROPERTIES=false
    - JACKSON_DEFAULT_PROPERTY_INCLUSION=NON_NULL
 
    Timezone
-   - TZ=Asia/Seoul
 
+   - TZ=Asia/Seoul
 
 ## 패키지 구조
 

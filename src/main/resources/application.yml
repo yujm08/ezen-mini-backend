@@ -12,17 +12,17 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     properties:
       hibernate:
-        "[show_sql]": true
-        "[format_sql]": true
+        '[show_sql]': true
+        '[format_sql]': true
     hibernate:
       ddl-auto: update
 
   jackson:
     serialization:
-      "[WRITE_DATES_AS_TIMESTAMPS]": ${JACKSON_WRITE_DATES_AS_TIMESTAMPS}
-      "[FAIL_ON_EMPTY_BEANS]": ${JACKSON_FAIL_ON_EMPTY_BEANS}
+      '[WRITE_DATES_AS_TIMESTAMPS]': ${JACKSON_WRITE_DATES_AS_TIMESTAMPS}
+      '[FAIL_ON_EMPTY_BEANS]': ${JACKSON_FAIL_ON_EMPTY_BEANS}
     deserialization:
-      "[FAIL_ON_UNKNOWN_PROPERTIES]": ${JACKSON_FAIL_ON_UNKNOWN_PROPERTIES}
+      '[FAIL_ON_UNKNOWN_PROPERTIES]': ${JACKSON_FAIL_ON_UNKNOWN_PROPERTIES}
     default-property-inclusion: ${JACKSON_DEFAULT_PROPERTY_INCLUSION}
     time-zone: ${TZ}
     date-format: yyyy-MM-dd HH:mm:ss
@@ -50,3 +50,12 @@ springdoc:
     - com.springboot.board.web.controller
   default-consumes-media-type: application/json
   default-produces-media-type: application/json
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
