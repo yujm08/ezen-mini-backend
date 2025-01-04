@@ -21,8 +21,10 @@ public class HealthController {
   @GetMapping
   public HealthResponse checkHealth() {
     HealthResponse.HealthStatus dbStatus = checkDatabase();
+    String overallStatus = dbStatus.getStatus().equals("UP") ? "UP" : "DOWN";
+
     return HealthResponse.builder()
-        .status("UP")
+        .status(overallStatus)
         .timestamp(System.currentTimeMillis())
         .details(new HealthResponse.Details(
             Runtime.getRuntime().maxMemory(),
