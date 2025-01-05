@@ -30,8 +30,10 @@
 ## API 문서 확인
 
 - Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
-- API 문서: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- Swagger EC2-UI: http://15.164.186.170:8080/swagger-ui/index.html
 
+- API 문서: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- API 문서- EC2: http://15.164.186.170:8080/v3/api-docs
 ## 기술 스택
 
 - Java 17
