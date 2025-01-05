@@ -33,7 +33,6 @@ jobs:
           fi
           echo "Running ssh-keyscan for host: $HOST"
           ssh-keyscan "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
-
       - name: Update Source Code on EC2
         run: |
           ssh $USER@$HOST << 'EOF'
@@ -47,19 +46,15 @@ jobs:
               git pull
             fi
           EOF
-
-      - name: Clean and Install Maven Project
+      - name: Clean Maven Project
         run: |
           ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn clean install -U"
-
       - name: Build Maven Project
         run: |
           ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn package -DskipTests"
-
       - name: Run Tests
         run: |
           ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn test"
-
       - name: Deploy Application
         run: |
           ssh $USER@$HOST << 'EOF'
