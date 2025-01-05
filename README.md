@@ -1,27 +1,33 @@
 # EZEN Mini 프로젝트 백엔드
 
-
 ### 설명
 
 - Ezen Boot Camp mini 프로젝트 백엔드 파트
 - 수업내용을 원본으로 API server 구현 리팩토링
-- Vscode , intellij 둘다 사용 가능
+- Vscode , intellij 둘 다 사용 가능
 - Spring Boot를 사용한 질문-답변 게시판 API 서버
 - RESTful API 설계 원칙 준수
 - 표준화된 응답 형식과 에러 처리
 - Swagger를 통한 API 문서화
-- CICD 구현 되어 있습니다. 이 부분 에러는 무시하세요.
+- CICD 구현되어 있습니다. 이 부분 에러는 무시하세요.
 
-### author: 
+### author:
+
 - Ezen A Team
 
 ### Verion:
+
+- 2.4.0 (2025-01-05) - 날짜/시간 표기 디버깅 완료
+- 2.3.2 (2025-01-05) - cicd 의존성 업데이트.
+- 2.3.1 (2025-01-05) - 날짜/시간 표기 디버깅 완료
+- 2.3.0 (2025-01-05) - Jackson 파일 날짜표기 한국시간으로 변경
+- 2.2.0 (2025-01-05) - 질문 상세조회 시 답변 목록 추가
+- 2.1.0 (2025-01-03) - Health Check 추가
 - 2.0.1 (2025-01-02) - CICD 구현
 - 2.0.0 (2025-01-02) - 표준화로의 노력
 - 1.0.0 (2025-01-01) - 기본형
 
-
-## API 문서
+## API 문서 확인
 
 - Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 - API 문서: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
@@ -60,21 +66,22 @@
 
 4. 의존성 설치 (.env 파일 생성):
 
+   Data Base
 
-    Data Base
    - DB_URL=
    - DB_USERNAME=
    - DB_PASSWORD=
 
    Jackson Configuration
+
    - JACKSON_WRITE_DATES_AS_TIMESTAMPS=false
    - JACKSON_FAIL_ON_EMPTY_BEANS=false
    - JACKSON_FAIL_ON_UNKNOWN_PROPERTIES=false
    - JACKSON_DEFAULT_PROPERTY_INCLUSION=NON_NULL
 
    Timezone
-   - TZ=Asia/Seoul
 
+   - TZ=Asia/Seoul
 
 ## 패키지 구조
 
