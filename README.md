@@ -26,7 +26,7 @@
 - 2.0.0 (2025-01-02) - 표준화로의 노력
 - 1.0.0 (2025-01-01) - 기본형
 
-## API 문서
+## API 문서 확인
 
 - Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 - API 문서: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
