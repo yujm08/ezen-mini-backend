@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import java.util.TimeZone;
+import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Configuration
 public class JacksonConfig {
@@ -17,7 +19,15 @@ public class JacksonConfig {
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         objectMapper.registerModule(javaTimeModule);
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        // 기본 시간대 설정
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
         objectMapper.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+
+        // LocalDateTime 직렬화/역직렬화 설정
+        objectMapper.configOverride(LocalDateTime.class)
+                .setFormat(JsonFormat.Value.forPattern("yyyy-MM-dd HH:mm:ss"));
+
         return objectMapper;
     }
 
