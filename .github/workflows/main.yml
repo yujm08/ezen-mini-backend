@@ -48,9 +48,9 @@ jobs:
             fi
           EOF
 
-      - name: Clean Maven Project
+      - name: Clean and Install Maven Project
         run: |
-          ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn clean"
+          ssh $USER@$HOST "cd /home/ubuntu/ezen-mini-backend && mvn clean install -U"
 
       - name: Build Maven Project
         run: |
