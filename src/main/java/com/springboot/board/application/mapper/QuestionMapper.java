@@ -1,5 +1,6 @@
 package com.springboot.board.application.mapper;
 
+import java.util.List;
 import com.springboot.board.api.v1.dto.request.QuestionCreateRequest;
 import com.springboot.board.api.v1.dto.response.QuestionResponse;
 import com.springboot.board.api.v1.dto.response.AnswerResponse;
@@ -15,5 +16,7 @@ public interface QuestionMapper {
     @Mapping(target = "answers", source = "answers")
     QuestionResponse toResponse(Question question);
 
-    AnswerResponse toResponse(Answer answer);
+    List<AnswerResponse> toAnswerResponses(List<Answer> answers);
+
+    AnswerResponse toAnswerResponse(Answer answer);
 }

@@ -67,7 +67,7 @@ public class QuestionService {
     // getQuestion 메서드는 주어진 ID로 질문을 조회하고,
     // 해당 질문이 존재하지 않을 경우 DataNotFoundException을 발생.
     public QuestionResponse getQuestion(Integer id) {
-        Question question = questionRepository.findById(id)
+        Question question = questionRepository.findByIdWithAnswers(id)
                 .orElseThrow(() -> new DataNotFoundException("질문을 찾을 수 없습니다."));
 
         return questionMapper.toResponse(question);
