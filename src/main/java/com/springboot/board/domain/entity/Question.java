@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
 import lombok.AccessLevel;
+import com.springboot.board.common.util.DateTimeUtil;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -40,8 +41,8 @@ public class Question {
     // 그래서 Builder 패턴을 사용하여 질문 객체를 생성하기 위한 생성자를 추가한다.
     @Builder
     public Question(String subject, String content) {
-        this.subject = subject; // 제목 설정
-        this.content = content; // 내용 설정
-        this.createDate = LocalDateTime.now(); // 현재 시간으로 생성일 설정
+        this.subject = subject;
+        this.content = content;
+        this.createDate = DateTimeUtil.now();
     }
 }

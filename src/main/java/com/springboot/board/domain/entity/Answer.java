@@ -13,9 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Builder;
 import lombok.AccessLevel;
-
-
-
+import com.springboot.board.common.util.DateTimeUtil;
 
 @Getter
 @Entity
@@ -26,21 +24,21 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; // 답변의 고유 ID
-    
+
     @Column(columnDefinition = "TEXT")
     private String content; // 답변의 내용
-    
-    private LocalDateTime createDate; 
-    
+
+    private LocalDateTime createDate;
+
     // 질문과의 다대일 관계를 설정하며, 지연 로딩을 사용하여 성능을 최적화하고 불필요한 데이터 로딩을 방지함
     @ManyToOne(fetch = FetchType.LAZY)
-    private Question question; 
-    
+    private Question question;
+
     // Builder 패턴을 사용하여 답변 객체를 생성하기 위한 생성자
     @Builder
     public Answer(String content, Question question) {
-        this.content = content; 
-        this.question = question; 
-        this.createDate = LocalDateTime.now(); 
+        this.content = content;
+        this.question = question;
+        this.createDate = DateTimeUtil.now();
     }
-} 
+}
