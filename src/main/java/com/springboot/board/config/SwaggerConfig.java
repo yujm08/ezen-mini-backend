@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * SwaggerConfig 클래스는 Swagger(OpenAPI) 설정을 위한 구성 클래스
- * 이 클래스는 API 문서화를 위한 OpenAPI 객체를 생성
+ * 이 클래스는 API 문서화를 위한 OpenAPI 객체를 생성한다.
  */
 @Configuration
 public class SwaggerConfig {
