@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: Board
+
+  datasource:
+    url: ${DB_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        '[show_sql]': true
+        '[format_sql]': true
+        jdbc:
+          time_zone: Asia/Seoul
+    hibernate:
+      ddl-auto: update
+
+  jackson:
+    serialization:
+      '[WRITE_DATES_AS_TIMESTAMPS]': ${JACKSON_WRITE_DATES_AS_TIMESTAMPS}
+      '[FAIL_ON_EMPTY_BEANS]': ${JACKSON_FAIL_ON_EMPTY_BEANS}
+    deserialization:
+      '[FAIL_ON_UNKNOWN_PROPERTIES]': ${JACKSON_FAIL_ON_UNKNOWN_PROPERTIES}
+    default-property-inclusion: ${JACKSON_DEFAULT_PROPERTY_INCLUSION}
+    time-zone: ${TZ}
+    date-format: yyyy-MM-dd HH:mm:ss
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# Swagger 설정 수정
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    display-request-duration: true
+  api-docs:
+    path: /v3/api-docs
+  packages-to-scan:
+    - com.springboot.board.api.v1.controller
+    - com.springboot.board.web.controller
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
