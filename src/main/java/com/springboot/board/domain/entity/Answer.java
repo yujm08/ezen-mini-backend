@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.FetchType;
 import lombok.Getter;
@@ -31,7 +32,8 @@ public class Answer {
     private LocalDateTime createDate;
 
     // 질문과의 다대일 관계를 설정하며, 지연 로딩을 사용하여 성능을 최적화하고 불필요한 데이터 로딩을 방지함
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "question_id") // 데이터베이스 컬럼 이름 명시
     private Question question;
 
     // Builder 패턴을 사용하여 답변 객체를 생성하기 위한 생성자

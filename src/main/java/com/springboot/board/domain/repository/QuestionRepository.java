@@ -20,4 +20,5 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     @Query("SELECT q FROM Question q LEFT JOIN FETCH q.answers WHERE q.id = :id")
     Optional<Question> findByIdWithAnswers(@Param("id") Integer id);
+
 }

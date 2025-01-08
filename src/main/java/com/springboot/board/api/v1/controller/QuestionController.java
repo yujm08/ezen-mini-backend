@@ -28,9 +28,9 @@ public class QuestionController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(schema = @Schema(implementation = QuestionResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @GetMapping
+    @GetMapping // /api/v1/questions?page=
     public ApiResponse<Page<QuestionResponse>> getQuestions(
-            @RequestParam(defaultValue = "0") int page) {
+            @RequestParam(defaultValue = "0", name = "page") int page) {
         return ApiResponse.success(questionService.getQuestions(page));
     }
 
@@ -51,8 +51,8 @@ public class QuestionController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(schema = @Schema(implementation = QuestionResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "질문 없음", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @GetMapping("/{id}")
-    public ApiResponse<QuestionResponse> getQuestion(@PathVariable Integer id) {
+    @GetMapping("/{id}") // /api/v1/questions/{id}
+    public ApiResponse<QuestionResponse> getQuestion(@PathVariable(name = "id") Integer id) {
         return ApiResponse.success(questionService.getQuestion(id));
     }
 }

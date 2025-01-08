@@ -20,11 +20,12 @@ import com.springboot.board.common.exception.DataNotFoundException;
 
 import org.springframework.data.domain.PageRequest;
 
-@Service
+
 // Transactional(readOnly = true)은 데이터베이스의 읽기 전용 트랜잭션을 설정하여 성능을 최적화하고, 데이터의 일관성을
 // 보장하기 위해 사용
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Service
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
@@ -74,8 +75,9 @@ public class QuestionService {
     }
 
     // Entity 조회를 위한 메서드 추가
-    public Question getQuestionEntity(Integer id) {
+    public Question getQuestionById(Integer id) {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("질문을 찾을 수 없습니다."));
     }
+    
 }
